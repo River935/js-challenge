@@ -32,9 +32,9 @@ Add animations and physics for falling stones
 [ ][ ][ ][ ][ ][ ]
 
 
-
 **Additional tasks**
 
+- [ ] ...
 - [ ] implement light/dark mode.
 - [x] work mobile.
 
