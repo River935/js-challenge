@@ -20,6 +20,10 @@ class Piece {
     this.player = player;
   }
 
+  resetPiece() {
+    (this.empty = true), (this.player = null);
+  }
+
   checkWin(player, x, y) {
     // check vertically
     let countPlayerPieces = 0;
@@ -28,6 +32,7 @@ class Piece {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
           console.log('Win, ' + player);
+          reset();
           return;
         }
       } else {
@@ -66,7 +71,7 @@ class Piece {
           countPlayerPieces = 0;
         }
       }
-      countPlayerPieces = 0;
+
       row = 5;
     }
 
@@ -83,9 +88,20 @@ class Piece {
           countPlayerPieces = 0;
         }
       }
-      countPlayerPieces = 0;
     }
   }
+}
+
+function reset() {
+  boardPieces.forEach((col, i) => {
+    col.forEach((row, p) => {
+      row.resetPiece();
+      let pieceElement = document.getElementById(`${i}.${p}`);
+
+      pieceElement.style.backgroundColor = 'white';
+    });
+  });
+  console.log(boardPieces);
 }
 
 function createArrBoardPieces() {
@@ -101,14 +117,25 @@ function createArrBoardPieces() {
 
 const boardPieces = createArrBoardPieces();
 
-function addPieceToBoard(player, x) {
+const player1 = 'red';
+const player2 = 'yellow';
+let currentPlayerTurn = player1;
+
+function addPieceToBoard(event) {
+  let x = event.currentTarget.id;
+
   for (let y = 5; y < boardPieces[x].length; y--) {
     if (y < 0) return;
     if (boardPieces[x][y].isEmpty()) {
       boardPieces[x][y].setEmpty();
-      boardPieces[x][y].setPlayer(player);
+      boardPieces[x][y].setPlayer(currentPlayerTurn);
+      const piece = document.getElementById(`${x}.${y}`);
+
+      piece.style.backgroundColor = currentPlayerTurn;
+
       // check if it is a win
-      boardPieces[x][y].checkWin(player, x, y);
+      boardPieces[x][y].checkWin(currentPlayerTurn, x, y);
+      currentPlayerTurn = currentPlayerTurn === player1 ? player2 : player1;
       return;
     }
   }
