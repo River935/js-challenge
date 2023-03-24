@@ -32,6 +32,7 @@ class Piece {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
           console.log('Win, ' + player);
+
           reset();
           return;
         }
@@ -47,6 +48,7 @@ class Piece {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
           console.log('Win row, ' + player);
+          reset();
           return;
         }
       } else {
@@ -64,6 +66,7 @@ class Piece {
           countPlayerPieces++;
           if (countPlayerPieces === 4) {
             console.log('Win diagonal, ' + player);
+            reset();
             return;
           }
           row--;
@@ -81,6 +84,7 @@ class Piece {
           countPlayerPieces++;
           if (countPlayerPieces === 4) {
             console.log('Win diagonal, ' + player);
+            reset();
             return;
           }
           row--;
@@ -93,6 +97,11 @@ class Piece {
 }
 
 function reset() {
+  let winnerContainer = document.getElementsByClassName("board__winner");
+  let winnerName = document.getElementsByClassName("board__winner-name");
+  console.log(winnerName[0]);
+  winnerContainer[0].style.display = "block";
+  winnerName[0].innerHTML = ` Player ${currentPlayerTurn} won!! `;
   boardPieces.forEach((col, i) => {
     col.forEach((row, p) => {
       row.resetPiece();
