@@ -32,15 +32,23 @@ Add animations and physics for falling stones
 [ ][ ][ ][ ][ ][ ]
 
 
+
+**To do list**
+
+- [ ] possible draw (nobody win).
+- [ ] create a button for play again (so it after resets).
+- [ ] name of players.
+- [ ] count how many times win.
+- [ ] show the the current player.
+- [ ] style the board nicely.
+
 **Additional tasks**
 
-- [ ] ...
-- [ ] implement light/dark mode.
-- [x] work mobile.
-
-**Random tasks**
-
-- [ ] ...
+- [ ] fancy style
+- [ ] Play with mouse or keyboard
+- [ ] settings: how big is the board, what are the winning conditions, customise colors
+- [ ] Add animations and physics for falling stones
+- [x] ..
 
 **Coding**
 
