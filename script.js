@@ -50,6 +50,41 @@ class Piece {
     }
     // check diagonally
     countPlayerPieces = 0;
+
+    //diagonal right to left
+    let row = 5;
+    for (let x = 6; x >= 3; x--) {
+      for (let i = 6; i >= 0; i--) {
+        if (boardPieces[i][row].getPlayer() === player) {
+          countPlayerPieces++;
+          if (countPlayerPieces === 4) {
+            console.log('Win diagonal, ' + player);
+            return;
+          }
+          row--;
+        } else {
+          countPlayerPieces = 0;
+        }
+      }
+      countPlayerPieces = 0;
+      row = 5;
+    }
+
+    for (let x = 0; x <= 3; x++) {
+      for (let i = 0; i <= 6; i++) {
+        if (boardPieces[i][row].getPlayer() === player) {
+          countPlayerPieces++;
+          if (countPlayerPieces === 4) {
+            console.log('Win diagonal, ' + player);
+            return;
+          }
+          row--;
+        } else {
+          countPlayerPieces = 0;
+        }
+      }
+      countPlayerPieces = 0;
+    }
   }
 }
 
@@ -68,6 +103,7 @@ const boardPieces = createArrBoardPieces();
 
 function addPieceToBoard(player, x) {
   for (let y = 5; y < boardPieces[x].length; y--) {
+    if (y < 0) return;
     if (boardPieces[x][y].isEmpty()) {
       boardPieces[x][y].setEmpty();
       boardPieces[x][y].setPlayer(player);
@@ -82,11 +118,38 @@ function checkIfWin(player, x) {
   // check vertically
 }
 
-addPieceToBoard(1, 6);
+/* addPieceToBoard(2, 5); // 6:5
+addPieceToBoard(2, 5); // 5:5
+addPieceToBoard(1, 5); // 5:4
+addPieceToBoard(1, 4); // 4:5
+addPieceToBoard(2, 4); // 4:4
+addPieceToBoard(2, 4); // 4:3
+addPieceToBoard(1, 4); // 3:5
+addPieceToBoard(2, 3); // 3:4
+addPieceToBoard(2, 3); // 3:3
+addPieceToBoard(1, 3); // 3:2
+addPieceToBoard(2, 3); // 3:2
+addPieceToBoard(1, 3); // 3:2
+addPieceToBoard(2, 2); // 3:2
+addPieceToBoard(1, 2); // 3:2
+addPieceToBoard(2, 2); // 3:2
+addPieceToBoard(1, 2); // 3:2
+addPieceToBoard(2, 2); // 3:2
+addPieceToBoard(1, 2); // 3:2 */
+
+addPieceToBoard(2, 3);
+addPieceToBoard(1, 3);
+addPieceToBoard(1, 4);
+addPieceToBoard(2, 4);
+addPieceToBoard(1, 4);
 addPieceToBoard(2, 5);
-addPieceToBoard(1, 4);
-addPieceToBoard(1, 3);
-addPieceToBoard(1, 6);
+addPieceToBoard(2, 5);
+addPieceToBoard(2, 5);
 addPieceToBoard(1, 5);
-addPieceToBoard(1, 4);
-addPieceToBoard(1, 3);
+addPieceToBoard(2, 6);
+addPieceToBoard(2, 6);
+addPieceToBoard(1, 6);
+addPieceToBoard(2, 6);
+addPieceToBoard(1, 6);
+
+// console.log(boardPieces);
