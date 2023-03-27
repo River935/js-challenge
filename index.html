@@ -30,11 +30,11 @@
         <label for="player2">Player 2</label>
         <input type="text" id="player2" placeholder="Name" required />
       </div>
-      <button type="submit">Start Game</button>
+      <button type="submit" class="submit__player-namesbtn">Start Game</button>
     </form>
     <div class="main__container">
       <div class="main__container__player" style="display: none">
-        <h2 class="main__container__player-name">Tiago</h2>
+        <h2 class="main__container__player-name"></h2>
         <div
           class="main__container__player__piece"
           style="background-color: red"
@@ -47,6 +47,8 @@
       <div class="board" style="display: none">
         <div class="board__winner" style="display: none">
           <h2 class="board__winner-name"></h2>
+          <button class="board__winner-namebutton">RESTART</button>
+          <button class="board__winner-namebutton">NEXT GAME</button>
         </div>
 
         <div class="board__col" id="0" onclick="addPieceEventHandler(event)">
@@ -108,7 +110,7 @@
         </div>
       </div>
       <div class="main__container__player" style="display: none">
-        <h2 class="main__container__player-name">Tiago</h2>
+        <h2 class="main__container__player-name"></h2>
         <div
           class="main__container__player__piece"
           style="background-color: yellow"

@@ -19,9 +19,8 @@ Fancy Frontend
 Play with mouse or keyboard
 settings: how big is the board, what are the winning conditions,
 customise colors
-Add animations and physics for falling stones 
+Add animations and physics for falling stones
 
-
 [ ][ ][ ][ ][ ][ ]
 [ ][ ][ ][ ][ ][ ]
 [ ][ ][ ][ ][ ][ ]
@@ -30,8 +29,6 @@ Add animations and physics for falling stones
 [ ][ ][ ][ ][ ][ ]
 [ ][ ][ ][ ][ ][ ]
 [ ][ ][ ][ ][ ][ ]
-
-
 
 **To do list**
 
@@ -55,3 +52,8 @@ Add animations and physics for falling stones
 - Write code that's good for others to read.
 - Give meaningful variable names. No shortenings!
 - Small functions.
+
+**Errors**
+
+- diagonal left to right, different order
+- double time yellow

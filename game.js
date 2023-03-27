@@ -1,5 +1,5 @@
 class Game {
-  constructor(player1Name, player2Name) {
+  constructor(player1Name = '', player2Name = '') {
     this.board = new Board();
     this.player1 = new Player(player1Name, 'red');
     this.player2 = new Player(player2Name, 'yellow');
@@ -34,7 +34,88 @@ class Game {
     return this.rounds;
   }
 
-  checkWin(player, x, y) {}
+  checkWin(player, x, y) {
+    if (this.rounds === 42) {
+      //console.log('draw');
+      return;
+    }
+    // check vertically
+    let countPlayerPieces = 0;
+    for (let i = 5; i >= 0; i--) {
+      if (game.board.boardPieces[x][i].getPlayer() === player) {
+        countPlayerPieces++;
+        if (countPlayerPieces === 4) {
+          game.displayWinner();
+
+          return;
+        }
+      } else {
+        countPlayerPieces = 0;
+      }
+    }
+
+    // check horizontally
+    countPlayerPieces = 0;
+    for (let j = 6; j >= 0; j--) {
+      if (game.board.boardPieces[j][y].getPlayer() === player) {
+        countPlayerPieces++;
+        if (countPlayerPieces === 4) {
+          game.displayWinner();
+          return;
+        }
+      } else {
+        countPlayerPieces = 0;
+      }
+    }
+    // check diagonally
+    countPlayerPieces = 0;
+
+    //diagonal right to left
+    let row = 5;
+    for (let x = 6; x >= 0; x--) {
+      for (let i = 6; i >= 0; i--) {
+        console.log(game.board.boardPieces[i][row], i, row);
+        if (game.board.boardPieces[i][row].getPlayer() === player) {
+          countPlayerPieces++;
+          //console.log(player);
+          if (countPlayerPieces === 4) {
+            game.displayWinner();
+            return;
+          }
+          row--;
+        } else {
+          countPlayerPieces = 0;
+        }
+      }
+    }
+
+    row = 5;
+
+    for (let x = 0; x <= 6; x++) {
+      for (let i = 0; i <= 6; i++) {
+        if (game.board.boardPieces[i][row].getPlayer() === player) {
+          countPlayerPieces++;
+          if (countPlayerPieces === 4) {
+            game.displayWinner();
+            return;
+          }
+          row--;
+        } else {
+          countPlayerPieces = 0;
+        }
+      }
+    }
+  }
+
+  displayWinner() {
+    let winnerContainer = document.getElementsByClassName('board__winner');
+    let winnerName = document.getElementsByClassName('board__winner-name');
+    //console.log(winnerName[0]);
+    winnerContainer[0].style.display = 'block';
+    winnerName[0].innerHTML = ` Player ${game
+      .getPlayerTurn()
+      .getName()} won!! `;
+  }
 }
 
 // on start game
@@ -54,6 +135,38 @@ class Board {
 
   resetBoard() {
     // this.boardPieces = [];
+
+    game.board.boardPieces.forEach((col, i) => {
+      col.forEach((row, p) => {
+        row.resetPiece();
+        let pieceElement = document.getElementById(`${i}.${p}`);
+
+        pieceElement.style.backgroundColor = 'white';
+      });
+    });
+    //console.log(boardPieces);
+  }
+  addPiece(event) {
+    let x = event.currentTarget.id;
+    let currentPlayerTurn = game.getPlayerTurn();
+    for (let y = 5; y >= 0; y--) {
+      if (y < 0) return;
+      //console.log('here', game.board.boardPieces[x][y]);
+      if (game.board.boardPieces[x][y].isEmpty()) {
+        game.board.boardPieces[x][y].setEmpty();
+        game.board.boardPieces[x][y].setPlayer(currentPlayerTurn);
+        const piece = document.getElementById(`${x}.${y}`);
+        //console.log(currentPlayerTurn);
+
+        piece.style.backgroundColor = currentPlayerTurn.color;
+
+        // check if it is a win
+        game.checkWin(currentPlayerTurn, x, y);
+        game.setPlayerTurn();
+        game.setRounds();
+        return;
+      }
+    }
   }
 }
 
@@ -110,32 +223,13 @@ function eventHandlerGetNames() {
   return [player1, player2];
 }
 
-function addPieceEventHandler(event) {
-  let x = event.currentTarget.id;
-
-  for (let y = 5; y < boardPieces[x].length; y--) {
-    if (y < 0) return;
-    if (boardPieces[x][y].isEmpty()) {
-      boardPieces[x][y].setEmpty();
-      boardPieces[x][y].setPlayer(currentPlayerTurn);
-      const piece = document.getElementById(`${x}.${y}`);
-
-      piece.style.backgroundColor = currentPlayerTurn;
-
-      // check if it is a win
-      boardPieces[x][y].checkWin(currentPlayerTurn, x, y);
-      currentPlayerTurn = currentPlayerTurn === player1 ? player2 : player1;
-      return;
-    }
-  }
-}
-
+const game = new Game();
 function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
 
   let form = document.getElementsByTagName('form');
-  console.log(form);
+  //console.log(form);
   form[0].style.display = 'none';
 
   let boardEl = document.getElementsByClassName('board');
@@ -144,10 +238,15 @@ function startGame() {
   let playersEl = document.getElementsByClassName('main__container__player');
   playersEl[0].style.display = 'flex';
   playersEl[1].style.display = 'flex';
+  let nameEl = document.getElementsByClassName('main__container__player-name');
 
-  const newGame = new Game(playersNames[0], playersNames[1]);
-  console.log(newGame);
-  console.log(newGame.board);
-  console.log(newGame.board.addPiece());
-  console.log(newGame.getPlayer2());
+  nameEl[0].innerHTML = playersNames[0];
+  nameEl[1].innerHTML = playersNames[1];
+
+  game.player1.name = playersNames[0];
+  game.player2.name = playersNames[1];
+}
+
+function addPieceEventHandler(event) {
+  game.board.addPiece(event);
 }
