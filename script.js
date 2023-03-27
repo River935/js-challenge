@@ -97,10 +97,10 @@ class Piece {
 }
 
 function reset() {
-  let winnerContainer = document.getElementsByClassName("board__winner");
-  let winnerName = document.getElementsByClassName("board__winner-name");
+  let winnerContainer = document.getElementsByClassName('board__winner');
+  let winnerName = document.getElementsByClassName('board__winner-name');
   console.log(winnerName[0]);
-  winnerContainer[0].style.display = "block";
+  winnerContainer[0].style.display = 'block';
   winnerName[0].innerHTML = ` Player ${currentPlayerTurn} won!! `;
   boardPieces.forEach((col, i) => {
     col.forEach((row, p) => {
@@ -154,25 +154,7 @@ function checkIfWin(player, x) {
   // check vertically
 }
 
-/* addPieceToBoard(2, 5); // 6:5
-addPieceToBoard(2, 5); // 5:5
-addPieceToBoard(1, 5); // 5:4
-addPieceToBoard(1, 4); // 4:5
-addPieceToBoard(2, 4); // 4:4
-addPieceToBoard(2, 4); // 4:3
-addPieceToBoard(1, 4); // 3:5
-addPieceToBoard(2, 3); // 3:4
-addPieceToBoard(2, 3); // 3:3
-addPieceToBoard(1, 3); // 3:2
-addPieceToBoard(2, 3); // 3:2
-addPieceToBoard(1, 3); // 3:2
-addPieceToBoard(2, 2); // 3:2
-addPieceToBoard(1, 2); // 3:2
-addPieceToBoard(2, 2); // 3:2
-addPieceToBoard(1, 2); // 3:2
-addPieceToBoard(2, 2); // 3:2
-addPieceToBoard(1, 2); // 3:2 */
-
+/*
 addPieceToBoard(2, 3);
 addPieceToBoard(1, 3);
 addPieceToBoard(1, 4);
@@ -186,6 +168,6 @@ addPieceToBoard(2, 6);
 addPieceToBoard(2, 6);
 addPieceToBoard(1, 6);
 addPieceToBoard(2, 6);
-addPieceToBoard(1, 6);
+addPieceToBoard(1, 6); */
 
 // console.log(boardPieces);

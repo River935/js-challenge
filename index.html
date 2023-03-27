@@ -16,66 +16,103 @@
     <div class="title">
       <h1 class="title__h1">4 in a row</h1>
     </div>
-    <div class="board">
-    <div class="board__winner" style="display:none"><h2 class="board__winner-name"></h2></div>
-      <div class="board__col" id="0" onclick="addPieceToBoard(event)">
-        <!-- onclick event addPiece -->
-        <div class="board__col-row" id="0.0"></div>
-        <div class="board__col-row" id="0.1"></div>
-        <div class="board__col-row" id="0.2"></div>
-        <div class="board__col-row" id="0.3"></div>
-        <div class="board__col-row" id="0.4"></div>
-        <div class="board__col-row" id="0.5"></div>
+
+    <form
+      onsubmit="startGame()"
+      class="submit__player-names"
+      style="display: flex"
+    >
+      <div>
+        <label for="player1">Player 1</label>
+        <input type="text" id="player1" placeholder="Name" required />
       </div>
-      <div class="board__col" id="1" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="1.0"></div>
-        <div class="board__col-row" id="1.1"></div>
-        <div class="board__col-row" id="1.2"></div>
-        <div class="board__col-row" id="1.3"></div>
-        <div class="board__col-row" id="1.4"></div>
-        <div class="board__col-row" id="1.5"></div>
+      <div>
+        <label for="player2">Player 2</label>
+        <input type="text" id="player2" placeholder="Name" required />
       </div>
-      <div class="board__col" id="2" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="2.0"></div>
-        <div class="board__col-row" id="2.1"></div>
-        <div class="board__col-row" id="2.2"></div>
-        <div class="board__col-row" id="2.3"></div>
-        <div class="board__col-row" id="2.4"></div>
-        <div class="board__col-row" id="2.5"></div>
+      <button type="submit">Start Game</button>
+    </form>
+    <div class="main__container">
+      <div class="main__container__player">
+        <h2 class="main__container__player-name">Tiago</h2>
+        <div class="board__col-row" style="background-color: red"></div>
+        <p class="main__container__player-wins">
+          <span class="main__container__player-wins--number">0</span> wins
+        </p>
       </div>
-      <div class="board__col" id="3" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="3.0"></div>
-        <div class="board__col-row" id="3.1"></div>
-        <div class="board__col-row" id="3.2"></div>
-        <div class="board__col-row" id="3.3"></div>
-        <div class="board__col-row" id="3.4"></div>
-        <div class="board__col-row" id="3.5"></div>
+
+      <div class="board" style="display: none">
+        <div class="board__winner" style="display: none">
+          <h2 class="board__winner-name"></h2>
+        </div>
+
+        <div class="board__col" id="0" onclick="addPieceToBoard(event)">
+          <!-- onclick event addPiece -->
+          <div class="board__col-row" id="0.0"></div>
+          <div class="board__col-row" id="0.1"></div>
+          <div class="board__col-row" id="0.2"></div>
+          <div class="board__col-row" id="0.3"></div>
+          <div class="board__col-row" id="0.4"></div>
+          <div class="board__col-row" id="0.5"></div>
+        </div>
+        <div class="board__col" id="1" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="1.0"></div>
+          <div class="board__col-row" id="1.1"></div>
+          <div class="board__col-row" id="1.2"></div>
+          <div class="board__col-row" id="1.3"></div>
+          <div class="board__col-row" id="1.4"></div>
+          <div class="board__col-row" id="1.5"></div>
+        </div>
+        <div class="board__col" id="2" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="2.0"></div>
+          <div class="board__col-row" id="2.1"></div>
+          <div class="board__col-row" id="2.2"></div>
+          <div class="board__col-row" id="2.3"></div>
+          <div class="board__col-row" id="2.4"></div>
+          <div class="board__col-row" id="2.5"></div>
+        </div>
+        <div class="board__col" id="3" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="3.0"></div>
+          <div class="board__col-row" id="3.1"></div>
+          <div class="board__col-row" id="3.2"></div>
+          <div class="board__col-row" id="3.3"></div>
+          <div class="board__col-row" id="3.4"></div>
+          <div class="board__col-row" id="3.5"></div>
+        </div>
+        <div class="board__col" id="4" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="4.0"></div>
+          <div class="board__col-row" id="4.1"></div>
+          <div class="board__col-row" id="4.2"></div>
+          <div class="board__col-row" id="4.3"></div>
+          <div class="board__col-row" id="4.4"></div>
+          <div class="board__col-row" id="4.5"></div>
+        </div>
+        <div class="board__col" id="5" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="5.0"></div>
+          <div class="board__col-row" id="5.1"></div>
+          <div class="board__col-row" id="5.2"></div>
+          <div class="board__col-row" id="5.3"></div>
+          <div class="board__col-row" id="5.4"></div>
+          <div class="board__col-row" id="5.5"></div>
+        </div>
+        <div class="board__col" id="6" onclick="addPieceToBoard(event)">
+          <div class="board__col-row" id="6.0"></div>
+          <div class="board__col-row" id="6.1"></div>
+          <div class="board__col-row" id="6.2"></div>
+          <div class="board__col-row" id="6.3"></div>
+          <div class="board__col-row" id="6.4"></div>
+          <div class="board__col-row" id="6.5"></div>
+        </div>
       </div>
-      <div class="board__col" id="4" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="4.0"></div>
-        <div class="board__col-row" id="4.1"></div>
-        <div class="board__col-row" id="4.2"></div>
-        <div class="board__col-row" id="4.3"></div>
-        <div class="board__col-row" id="4.4"></div>
-        <div class="board__col-row" id="4.5"></div>
-      </div>
-      <div class="board__col" id="5" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="5.0"></div>
-        <div class="board__col-row" id="5.1"></div>
-        <div class="board__col-row" id="5.2"></div>
-        <div class="board__col-row" id="5.3"></div>
-        <div class="board__col-row" id="5.4"></div>
-        <div class="board__col-row" id="5.5"></div>
-      </div>
-      <div class="board__col" id="6" onclick="addPieceToBoard(event)">
-        <div class="board__col-row" id="6.0"></div>
-        <div class="board__col-row" id="6.1"></div>
-        <div class="board__col-row" id="6.2"></div>
-        <div class="board__col-row" id="6.3"></div>
-        <div class="board__col-row" id="6.4"></div>
-        <div class="board__col-row" id="6.5"></div>
+      <div class="main__container__player">
+        <h2 class="main__container__player-name">Tiago</h2>
+        <div class="board__col-row" style="background-color: yellow"></div>
+        <p class="main__container__player-wins">
+          <span class="main__container__player-wins--number">0</span> wins
+        </p>
       </div>
     </div>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="game.js"></script>
   </body>
 </html>
