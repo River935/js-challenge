@@ -79,8 +79,6 @@ class Piece {
     this.player = player;
   }
 
-  addPiece() {}
-
   resetPiece() {
     (this.empty = true), (this.player = null);
   }
@@ -112,6 +110,26 @@ function eventHandlerGetNames() {
   return [player1, player2];
 }
 
+function addPieceEventHandler(event) {
+  let x = event.currentTarget.id;
+
+  for (let y = 5; y < boardPieces[x].length; y--) {
+    if (y < 0) return;
+    if (boardPieces[x][y].isEmpty()) {
+      boardPieces[x][y].setEmpty();
+      boardPieces[x][y].setPlayer(currentPlayerTurn);
+      const piece = document.getElementById(`${x}.${y}`);
+
+      piece.style.backgroundColor = currentPlayerTurn;
+
+      // check if it is a win
+      boardPieces[x][y].checkWin(currentPlayerTurn, x, y);
+      currentPlayerTurn = currentPlayerTurn === player1 ? player2 : player1;
+      return;
+    }
+  }
+}
+
 function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
@@ -123,8 +141,13 @@ function startGame() {
   let boardEl = document.getElementsByClassName('board');
   boardEl[0].style.display = 'flex';
 
+  let playersEl = document.getElementsByClassName('main__container__player');
+  playersEl[0].style.display = 'flex';
+  playersEl[1].style.display = 'flex';
+
   const newGame = new Game(playersNames[0], playersNames[1]);
   console.log(newGame);
   console.log(newGame.board);
+  console.log(newGame.board.addPiece());
   console.log(newGame.getPlayer2());
 }
