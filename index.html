@@ -33,9 +33,12 @@
       <button type="submit">Start Game</button>
     </form>
     <div class="main__container">
-      <div class="main__container__player">
+      <div class="main__container__player" style="display: none">
         <h2 class="main__container__player-name">Tiago</h2>
-        <div class="board__col-row" style="background-color: red"></div>
+        <div
+          class="main__container__player__piece"
+          style="background-color: red"
+        ></div>
         <p class="main__container__player-wins">
           <span class="main__container__player-wins--number">0</span> wins
         </p>
@@ -46,7 +49,7 @@
           <h2 class="board__winner-name"></h2>
         </div>
 
-        <div class="board__col" id="0" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="0" onclick="addPieceEventHandler(event)">
           <!-- onclick event addPiece -->
           <div class="board__col-row" id="0.0"></div>
           <div class="board__col-row" id="0.1"></div>
@@ -55,7 +58,7 @@
           <div class="board__col-row" id="0.4"></div>
           <div class="board__col-row" id="0.5"></div>
         </div>
-        <div class="board__col" id="1" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="1" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="1.0"></div>
           <div class="board__col-row" id="1.1"></div>
           <div class="board__col-row" id="1.2"></div>
@@ -63,7 +66,7 @@
           <div class="board__col-row" id="1.4"></div>
           <div class="board__col-row" id="1.5"></div>
         </div>
-        <div class="board__col" id="2" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="2" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="2.0"></div>
           <div class="board__col-row" id="2.1"></div>
           <div class="board__col-row" id="2.2"></div>
@@ -71,7 +74,7 @@
           <div class="board__col-row" id="2.4"></div>
           <div class="board__col-row" id="2.5"></div>
         </div>
-        <div class="board__col" id="3" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="3" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="3.0"></div>
           <div class="board__col-row" id="3.1"></div>
           <div class="board__col-row" id="3.2"></div>
@@ -79,7 +82,7 @@
           <div class="board__col-row" id="3.4"></div>
           <div class="board__col-row" id="3.5"></div>
         </div>
-        <div class="board__col" id="4" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="4" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="4.0"></div>
           <div class="board__col-row" id="4.1"></div>
           <div class="board__col-row" id="4.2"></div>
@@ -87,7 +90,7 @@
           <div class="board__col-row" id="4.4"></div>
           <div class="board__col-row" id="4.5"></div>
         </div>
-        <div class="board__col" id="5" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="5" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="5.0"></div>
           <div class="board__col-row" id="5.1"></div>
           <div class="board__col-row" id="5.2"></div>
@@ -95,7 +98,7 @@
           <div class="board__col-row" id="5.4"></div>
           <div class="board__col-row" id="5.5"></div>
         </div>
-        <div class="board__col" id="6" onclick="addPieceToBoard(event)">
+        <div class="board__col" id="6" onclick="addPieceEventHandler(event)">
           <div class="board__col-row" id="6.0"></div>
           <div class="board__col-row" id="6.1"></div>
           <div class="board__col-row" id="6.2"></div>
@@ -104,9 +107,12 @@
           <div class="board__col-row" id="6.5"></div>
         </div>
       </div>
-      <div class="main__container__player">
+      <div class="main__container__player" style="display: none">
         <h2 class="main__container__player-name">Tiago</h2>
-        <div class="board__col-row" style="background-color: yellow"></div>
+        <div
+          class="main__container__player__piece"
+          style="background-color: yellow"
+        ></div>
         <p class="main__container__player-wins">
           <span class="main__container__player-wins--number">0</span> wins
         </p>
