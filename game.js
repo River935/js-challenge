@@ -1,8 +1,8 @@
 class Game {
-  constructor(player1Name = '', player2Name = '') {
+  constructor(player1Name = "", player2Name = "") {
     this.board = new Board();
-    this.player1 = new Player(player1Name, 'red');
-    this.player2 = new Player(player2Name, 'yellow');
+    this.player1 = new Player(player1Name, "red");
+    this.player2 = new Player(player2Name, "yellow");
     this.playerTurn = this.player1;
     this.rounds = 0;
     this.winners = [];
@@ -36,8 +36,9 @@ class Game {
 
   checkWin(player, x, y) {
     if (this.rounds === 42) {
-      //console.log('draw');
-      return;
+      console.log('draw');
+      game.displayWinner("draw");
+      return ;
     }
     // check vertically
     let countPlayerPieces = 0;
@@ -45,13 +46,14 @@ class Game {
       if (game.board.boardPieces[x][i].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-          game.displayWinner();
 
+          game.displayWinner("winner");
           return;
         }
       } else {
         countPlayerPieces = 0;
       }
+
     }
 
     // check horizontally
@@ -60,7 +62,8 @@ class Game {
       if (game.board.boardPieces[j][y].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-          game.displayWinner();
+
+          game.displayWinner("winner");
           return;
         }
       } else {
@@ -68,54 +71,58 @@ class Game {
       }
     }
     // check diagonally
-    countPlayerPieces = 0;
+  
 
-    //diagonal right to left
-    let row = 5;
-    for (let x = 6; x >= 0; x--) {
-      for (let i = 6; i >= 0; i--) {
-        console.log(game.board.boardPieces[i][row], i, row);
-        if (game.board.boardPieces[i][row].getPlayer() === player) {
-          countPlayerPieces++;
-          //console.log(player);
-          if (countPlayerPieces === 4) {
-            game.displayWinner();
+    //check diagonal right to left
+    for (let i = 6; i >= 3; i--) {
+      for (let j = 5; j >= 3; j--) {
+        if (game.board.boardPieces[i][j].getPlayer() === player) {
+          if (
+            game.board.boardPieces[i - 1][j - 1].getPlayer() === player &&
+            game.board.boardPieces[i - 2][j - 2].getPlayer() === player &&
+            game.board.boardPieces[i - 3][j - 3].getPlayer() === player
+          ) {
+            game.displayWinner("winner");
             return;
           }
-          row--;
-        } else {
-          countPlayerPieces = 0;
         }
       }
     }
-
-    row = 5;
-
-    for (let x = 0; x <= 6; x++) {
-      for (let i = 0; i <= 6; i++) {
-        if (game.board.boardPieces[i][row].getPlayer() === player) {
-          countPlayerPieces++;
-          if (countPlayerPieces === 4) {
-            game.displayWinner();
+    //check left to right
+    for (let i = 0; i <= 3; i++) {
+      for (let j = 5; j >= 3; j--) {
+        if (game.board.boardPieces[i][j].getPlayer() === player) {
+          if (
+            game.board.boardPieces[i + 1][j - 1].getPlayer() === player &&
+            game.board.boardPieces[i + 2][j - 2].getPlayer() === player &&
+            game.board.boardPieces[i + 3][j - 3].getPlayer() === player
+          ) {
+            game.displayWinner("winner");
             return;
           }
-          row--;
-        } else {
-          countPlayerPieces = 0;
         }
       }
-    }
   }
+}
+   
+    
 
-  displayWinner() {
-    let winnerContainer = document.getElementsByClassName('board__winner');
-    let winnerName = document.getElementsByClassName('board__winner-name');
+  // display winner
+  displayWinner(result) {
+    let winnerContainer = document.getElementsByClassName("board__winner");
+    let winnerName = document.getElementsByClassName("board__winner-name");
     //console.log(winnerName[0]);
-    winnerContainer[0].style.display = 'block';
+    if (result === "winner") {
+    winnerContainer[0].style.display = "block";
     winnerName[0].innerHTML = ` Player ${game
       .getPlayerTurn()
       .getName()} won!! `;
+    }else if (result === "draw"){
+    winnerContainer[0].style.display = "block";
+    winnerName[0].innerHTML = ` it´s a draw!!! `;
   }
+ 
+}
 }
 
 // on start game
@@ -141,7 +148,7 @@ class Board {
         row.resetPiece();
         let pieceElement = document.getElementById(`${i}.${p}`);
 
-        pieceElement.style.backgroundColor = 'white';
+        pieceElement.style.backgroundColor = "white";
       });
     });
     //console.log(boardPieces);
@@ -161,9 +168,11 @@ class Board {
         piece.style.backgroundColor = currentPlayerTurn.color;
 
         // check if it is a win
+        
+        game.setRounds();
         game.checkWin(currentPlayerTurn, x, y);
         game.setPlayerTurn();
-        game.setRounds();
+        console.log(game.getRounds());
         return;
       }
     }
@@ -228,17 +237,17 @@ function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
 
-  let form = document.getElementsByTagName('form');
+  let form = document.getElementsByTagName("form");
   //console.log(form);
-  form[0].style.display = 'none';
+  form[0].style.display = "none";
 
-  let boardEl = document.getElementsByClassName('board');
-  boardEl[0].style.display = 'flex';
+  let boardEl = document.getElementsByClassName("board");
+  boardEl[0].style.display = "flex";
 
-  let playersEl = document.getElementsByClassName('main__container__player');
-  playersEl[0].style.display = 'flex';
-  playersEl[1].style.display = 'flex';
-  let nameEl = document.getElementsByClassName('main__container__player-name');
+  let playersEl = document.getElementsByClassName("main__container__player");
+  playersEl[0].style.display = "flex";
+  playersEl[1].style.display = "flex";
+  let nameEl = document.getElementsByClassName("main__container__player-name");
 
   nameEl[0].innerHTML = playersNames[0];
   nameEl[1].innerHTML = playersNames[1];
