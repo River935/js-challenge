@@ -43,15 +43,23 @@
           style="background-color: red"
         ></div>
         <p class="main__container__player-wins">
-          <span class="main__container__player-wins--number">0</span> wins
+          <span
+            class="main__container__player-wins--number"
+            id="player1Wins"
+          ></span>
+          wins
         </p>
       </div>
 
       <div class="board" style="display: none">
         <div class="board__winner" style="display: none">
           <h2 class="board__winner-name"></h2>
-          <button class="board__winner-namebutton" id="restartGame">RESTART</button>
-          <button class="board__winner-namebutton">NEXT GAME</button>
+          <button class="board__winner-namebutton" id="restartGame">
+            RESTART
+          </button>
+          <button class="board__winner-namebutton" id="nextGame">
+            NEXT GAME
+          </button>
         </div>
 
         <div class="board__col" id="0" onclick="addPieceEventHandler(event)">
@@ -119,7 +127,11 @@
           style="background-color: yellow"
         ></div>
         <p class="main__container__player-wins">
-          <span class="main__container__player-wins--number">0</span> wins
+          <span
+            class="main__container__player-wins--number"
+            id="player2Wins"
+          ></span>
+          wins
         </p>
       </div>
     </div>
