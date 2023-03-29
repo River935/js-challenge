@@ -36,9 +36,9 @@ class Game {
 
   checkWin(player, x, y) {
     if (this.rounds === 42) {
-      console.log('draw');
+      console.log("draw");
       game.displayWinner("draw");
-      return ;
+      return;
     }
     // check vertically
     let countPlayerPieces = 0;
@@ -46,14 +46,12 @@ class Game {
       if (game.board.boardPieces[x][i].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-
           game.displayWinner("winner");
           return;
         }
       } else {
         countPlayerPieces = 0;
       }
-
     }
 
     // check horizontally
@@ -62,7 +60,6 @@ class Game {
       if (game.board.boardPieces[j][y].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-
           game.displayWinner("winner");
           return;
         }
@@ -71,7 +68,6 @@ class Game {
       }
     }
     // check diagonally
-  
 
     //check diagonal right to left
     for (let i = 6; i >= 3; i--) {
@@ -102,28 +98,33 @@ class Game {
           }
         }
       }
+    }
   }
-}
-   
-    
 
   // display winner
   displayWinner(result) {
     let winnerContainer = document.getElementsByClassName("board__winner");
     let winnerName = document.getElementsByClassName("board__winner-name");
     //console.log(winnerName[0]);
+    winnerContainer[0].style.display = "block";
     if (result === "winner") {
-    winnerContainer[0].style.display = "block";
-    winnerName[0].innerHTML = ` Player ${game
-      .getPlayerTurn()
-      .getName()} won!! `;
-    }else if (result === "draw"){
-    winnerContainer[0].style.display = "block";
-    winnerName[0].innerHTML = ` it´s a draw!!! `;
+      winnerName[0].innerHTML = ` Player ${game
+        .getPlayerTurn()
+        .getName()} won!! `;
+    } else if (result === "draw") {
+      winnerName[0].innerHTML = ` it´s a draw!!! `;
+    }
+    let btnRestart = document.getElementById("restartGame");
+    btnRestart.addEventListener("click", () => {
+      this.restartGame();
+    });
   }
- 
+
+  restartGame() {
+    window.location.reload();
+  }
 }
-}
+
 
 // on start game
 class Board {
@@ -141,17 +142,13 @@ class Board {
   }
 
   resetBoard() {
-    // this.boardPieces = [];
-
-    game.board.boardPieces.forEach((col, i) => {
+    game.boardPieces.forEach((col, i) => {
       col.forEach((row, p) => {
         row.resetPiece();
         let pieceElement = document.getElementById(`${i}.${p}`);
-
         pieceElement.style.backgroundColor = "white";
       });
     });
-    //console.log(boardPieces);
   }
   addPiece(event) {
     let x = event.currentTarget.id;
@@ -168,7 +165,7 @@ class Board {
         piece.style.backgroundColor = currentPlayerTurn.color;
 
         // check if it is a win
-        
+
         game.setRounds();
         game.checkWin(currentPlayerTurn, x, y);
         game.setPlayerTurn();
@@ -231,6 +228,8 @@ function eventHandlerGetNames() {
   let player2 = event.target[1].value;
   return [player1, player2];
 }
+
+function restartGameHandler() {}
 
 const game = new Game();
 function startGame() {
