@@ -110,7 +110,7 @@ class Game {
       winnerName[0].innerHTML = ` Player ${game
         .getPlayerTurn()
         .getName()} won!! `;
-        celebrate();
+      celebrate();
       game.getPlayerTurn().setWins();
       if (game.getPlayerTurn() === game.getPlayer1()) {
         console.log('player1 wins', game.getPlayer1().getWins());
@@ -283,11 +283,21 @@ function addPieceEventHandler(event) {
 
 //confetti
 const canvas = document.querySelector('#confetti');
-const jsConfetti = new JSConfetti();
+/* const jsConfetti = new JSConfetti();
+
+console.log(jsConfetti);
 
 function celebrate() {
-  jsConfetti.addConfetti({
-    emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🦄', '🌸'],
-}).then(() => jsConfetti.addConfetti())
-}
+  jsConfetti
+    .addConfetti({
+      emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🦄', '🌸'],
+    })
+    .then(() => jsConfetti.addConfetti());
+} */
 
+module.exports = {
+  Game,
+  Board,
+  Piece,
+  Player,
+};
