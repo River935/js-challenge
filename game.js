@@ -1,11 +1,10 @@
 class Game {
-  constructor(player1Name = "", player2Name = "") {
+  constructor(player1Name = '', player2Name = '') {
     this.board = new Board();
-    this.player1 = new Player(player1Name, "red");
-    this.player2 = new Player(player2Name, "yellow");
+    this.player1 = new Player(player1Name, 'red');
+    this.player2 = new Player(player2Name, 'yellow');
     this.playerTurn = this.player1;
     this.rounds = 0;
-    this.winners = [];
   }
 
   // add players based on input
@@ -36,8 +35,8 @@ class Game {
 
   checkWin(player, x, y) {
     if (this.rounds === 42) {
-      console.log("draw");
-      game.displayWinner("draw");
+      console.log('draw');
+      game.displayWinner('draw');
       return;
     }
     // check vertically
@@ -46,7 +45,7 @@ class Game {
       if (game.board.boardPieces[x][i].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-          game.displayWinner("winner");
+          game.displayWinner('winner');
           return;
         }
       } else {
@@ -60,7 +59,7 @@ class Game {
       if (game.board.boardPieces[j][y].getPlayer() === player) {
         countPlayerPieces++;
         if (countPlayerPieces === 4) {
-          game.displayWinner("winner");
+          game.displayWinner('winner');
           return;
         }
       } else {
@@ -78,7 +77,7 @@ class Game {
             game.board.boardPieces[i - 2][j - 2].getPlayer() === player &&
             game.board.boardPieces[i - 3][j - 3].getPlayer() === player
           ) {
-            game.displayWinner("winner");
+            game.displayWinner('winner');
             return;
           }
         }
@@ -93,7 +92,7 @@ class Game {
             game.board.boardPieces[i + 2][j - 2].getPlayer() === player &&
             game.board.boardPieces[i + 3][j - 3].getPlayer() === player
           ) {
-            game.displayWinner("winner");
+            game.displayWinner('winner');
             return;
           }
         }
@@ -103,28 +102,46 @@ class Game {
 
   // display winner
   displayWinner(result) {
-    let winnerContainer = document.getElementsByClassName("board__winner");
-    let winnerName = document.getElementsByClassName("board__winner-name");
+    let winnerContainer = document.getElementsByClassName('board__winner');
+    let winnerName = document.getElementsByClassName('board__winner-name');
     //console.log(winnerName[0]);
-    winnerContainer[0].style.display = "block";
-    if (result === "winner") {
+    winnerContainer[0].style.display = 'block';
+    if (result === 'winner') {
       winnerName[0].innerHTML = ` Player ${game
         .getPlayerTurn()
         .getName()} won!! `;
-    } else if (result === "draw") {
+      game.getPlayerTurn().setWins();
+      if (game.getPlayerTurn() === game.getPlayer1()) {
+        console.log('player1 wins', game.getPlayer1().getWins());
+        let player1Wins = document.getElementById('player1Wins');
+        player1Wins.innerHTML = game.getPlayer1().getWins();
+      } else {
+        let player2Wins = document.getElementById('player2Wins');
+        player2Wins.innerHTML = game.getPlayer2().getWins();
+      }
+    } else if (result === 'draw') {
       winnerName[0].innerHTML = ` it´s a draw!!! `;
     }
-    let btnRestart = document.getElementById("restartGame");
-    btnRestart.addEventListener("click", () => {
+    let btnRestart = document.getElementById('restartGame');
+    btnRestart.addEventListener('click', () => {
       this.restartGame();
+    });
+    let btnNextGame = document.getElementById('nextGame');
+    btnNextGame.addEventListener('click', () => {
+      this.nextGame();
     });
   }
 
   restartGame() {
     window.location.reload();
   }
-}
 
+  nextGame() {
+    game.board.resetBoard();
+    let winnerContainer = document.getElementsByClassName('board__winner');
+    winnerContainer[0].style.display = 'none';
+  }
+}
 
 // on start game
 class Board {
@@ -142,11 +159,11 @@ class Board {
   }
 
   resetBoard() {
-    game.boardPieces.forEach((col, i) => {
+    game.board.boardPieces.forEach((col, i) => {
       col.forEach((row, p) => {
         row.resetPiece();
         let pieceElement = document.getElementById(`${i}.${p}`);
-        pieceElement.style.backgroundColor = "white";
+        pieceElement.style.backgroundColor = 'white';
       });
     });
   }
@@ -169,7 +186,6 @@ class Board {
         game.setRounds();
         game.checkWin(currentPlayerTurn, x, y);
         game.setPlayerTurn();
-        console.log(game.getRounds());
         return;
       }
     }
@@ -214,7 +230,7 @@ class Player {
   }
 
   getWins() {
-    return this.score;
+    return this.wins;
   }
 
   setWins() {
@@ -236,23 +252,28 @@ function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
 
-  let form = document.getElementsByTagName("form");
+  let form = document.getElementsByTagName('form');
   //console.log(form);
-  form[0].style.display = "none";
+  form[0].style.display = 'none';
 
-  let boardEl = document.getElementsByClassName("board");
-  boardEl[0].style.display = "flex";
+  let boardEl = document.getElementsByClassName('board');
+  boardEl[0].style.display = 'flex';
 
-  let playersEl = document.getElementsByClassName("main__container__player");
-  playersEl[0].style.display = "flex";
-  playersEl[1].style.display = "flex";
-  let nameEl = document.getElementsByClassName("main__container__player-name");
+  let playersEl = document.getElementsByClassName('main__container__player');
+  playersEl[0].style.display = 'flex';
+  playersEl[1].style.display = 'flex';
+  let nameEl = document.getElementsByClassName('main__container__player-name');
 
   nameEl[0].innerHTML = playersNames[0];
   nameEl[1].innerHTML = playersNames[1];
 
   game.player1.name = playersNames[0];
   game.player2.name = playersNames[1];
+
+  let player1Wins = document.getElementById('player1Wins');
+  player1Wins.innerHTML = game.player1.getWins();
+  let player2Wins = document.getElementById('player2Wins');
+  player2Wins.innerHTML = game.player2.getWins();
 }
 
 function addPieceEventHandler(event) {
