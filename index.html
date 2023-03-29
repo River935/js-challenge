@@ -11,8 +11,11 @@
 
     <title>4 in a row</title>
     <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
   </head>
   <body>
+    <canvas id="confetti"></canvas>
+
     <div class="title">
       <h1 class="title__h1">4 in a row</h1>
     </div>
@@ -22,13 +25,13 @@
       class="submit__player-names"
       style="display: flex"
     >
-      <div>
+      <div class="submit__player-names-div">
         <label for="player1">Player 1</label>
-        <input type="text" id="player1" placeholder="Name" required />
+        <input type="text" class="submit__player-names-div-pl" id="player1" placeholder="Name" required />
       </div>
-      <div>
+      <div class="submit__player-names-div">
         <label for="player2">Player 2</label>
-        <input type="text" id="player2" placeholder="Name" required />
+        <input type="text" class="submit__player-names-div-pl" id="player2" placeholder="Name" required />
       </div>
       <button type="submit" class="submit__player-namesbtn">Start Game</button>
     </form>
@@ -121,6 +124,7 @@
       </div>
     </div>
     <!-- <script src="script.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script src="game.js"></script>
   </body>
 </html>

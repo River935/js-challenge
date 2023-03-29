@@ -1,0 +1,12 @@
+{
+  "name": "js-challenge",
+  "version": "1.0.0",
+  "description": "JS Challenge",
+  "type": "commonjs",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

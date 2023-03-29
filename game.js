@@ -41,18 +41,19 @@ class Game {
       return;
     }
     // check vertically
-    let countPlayerPieces = 0;
-    for (let i = 5; i >= 0; i--) {
-      if (game.board.boardPieces[x][i].getPlayer() === player) {
-        countPlayerPieces++;
-        if (countPlayerPieces === 4) {
-          game.displayWinner("winner");
-          return;
+      let countPlayerPieces = 0;
+      for (let i = 5; i >= 0; i--) {
+        if (game.board.boardPieces[x][i].getPlayer() === player) {
+          countPlayerPieces++;
+          if (countPlayerPieces === 4) {
+            game.displayWinner("winner");
+            return;
+          }
+        } else {
+          countPlayerPieces = 0;
         }
-      } else {
-        countPlayerPieces = 0;
       }
-    }
+    
 
     // check horizontally
     countPlayerPieces = 0;
@@ -111,6 +112,7 @@ class Game {
       winnerName[0].innerHTML = ` Player ${game
         .getPlayerTurn()
         .getName()} won!! `;
+        celebrate();
     } else if (result === "draw") {
       winnerName[0].innerHTML = ` it´s a draw!!! `;
     }
@@ -258,3 +260,14 @@ function startGame() {
 function addPieceEventHandler(event) {
   game.board.addPiece(event);
 }
+
+//confetti
+const canvas = document.querySelector('#confetti');
+const jsConfetti = new JSConfetti();
+
+function celebrate() {
+  jsConfetti.addConfetti({
+    emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🦄', '🌸'],
+}).then(() => jsConfetti.addConfetti())
+}
+
