@@ -143,7 +143,6 @@ class Game {
   }
 }
 
-// on start game
 class Board {
   constructor() {
     this.boardPieces = [];
@@ -238,16 +237,8 @@ class Player {
   }
 }
 
-function eventHandlerGetNames() {
-  event.preventDefault();
-  let player1 = event.target[0].value;
-  let player2 = event.target[1].value;
-  return [player1, player2];
-}
-
-function restartGameHandler() {}
-
 const game = new Game();
+
 function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
@@ -278,4 +269,11 @@ function startGame() {
 
 function addPieceEventHandler(event) {
   game.board.addPiece(event);
+}
+
+function eventHandlerGetNames() {
+  event.preventDefault();
+  let player1 = event.target[0].value;
+  let player2 = event.target[1].value;
+  return [player1, player2];
 }
