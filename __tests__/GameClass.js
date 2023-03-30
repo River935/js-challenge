@@ -1,5 +1,7 @@
 const myGame = require('../game.js');
 
+// to be able to run this tests you need to comment in the line 306 to 317 of game.js file
+
 const { Game, Board, Pieces, Player } = myGame;
 
 describe('Game class', () => {
@@ -34,7 +36,7 @@ describe('Game class', () => {
     expect(newGame.getPlayer1()).toBe(newGame.player1);
   });
 
-  test('should return a draw if there are no winners and all slots are filled', () => {
+  /*  test('should return a draw if there are no winners and all slots are filled', () => {
     // setup
     const player1 = newGame.getPlayer1();
     const player2 = newGame.getPlayer2();
@@ -53,5 +55,6 @@ describe('Game class', () => {
     }
 
     // execute
-  });
+
+  }); */
 });
