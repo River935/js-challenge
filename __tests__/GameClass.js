@@ -1,47 +1,57 @@
 const myGame = require('../game.js');
 
-describe('Game', () => {
-  const game = new myGame.Game();
-  it('should create a new game instance', () => {
-    expect(game).toBeInstanceOf(myGame.Game);
+const { Game, Board, Pieces, Player } = myGame;
+
+describe('Game class', () => {
+  // Arrange
+  let newGame;
+  beforeEach(() => {
+    newGame = new Game('Tiago', 'Chiara');
   });
 
-  it('should have two player properties that are a instance of Player()', () => {
-    expect(game.player1).toBeInstanceOf(myGame.Player);
-    expect(game.player2).toBeInstanceOf(myGame.Player);
+  test('should create a new game instance', () => {
+    expect(newGame).toBeInstanceOf(Game);
   });
 
-  it('should have a board property that is an instance of Board()', () => {
-    expect(game.board).toBeInstanceOf(myGame.Board);
+  test('should have two player properties that are a instance of Player()', () => {
+    expect(newGame.player1).toBeInstanceOf(Player);
+    expect(newGame.player2).toBeInstanceOf(Player);
   });
 
-  it('should have a playerTurn property that has the value of the property Player1', () => {
-    expect(game.playerTurn).toBe(game.player1);
+  test('should have a board property that is an instance of Board()', () => {
+    expect(newGame.board).toBeInstanceOf(Board);
   });
 
-  it('should have a rounds property that has the value of 0', () => {
-    expect(game.rounds).toBe(0);
+  test('should have a playerTurn property that has the value of the property Player1', () => {
+    expect(newGame.playerTurn).toBe(newGame.player1);
   });
 
-  it('should have a getPlayer1() method that returns the value of the player1 property', () => {
-    expect(game.getPlayer1()).toBe(game.player1);
+  test('should have a rounds property that has the value of 0 at start', () => {
+    expect(newGame.rounds).toBe(0);
   });
 
-  it('should call displayWinner() with a draw when checking win at the 42nd round', () => {
-    //setup
-    class newGame extends myGame.Game {
-      constructor() {
-        super();
-        this.rounds = 42;
-      }
-      displayWinner(result) {
-        return result;
+  test('should have a getPlayer1() method that returns the value of the player1 property', () => {
+    expect(newGame.getPlayer1()).toBe(newGame.player1);
+  });
+
+  test('should return a draw if there are no winners and all slots are filled', () => {
+    // setup
+    const player1 = newGame.getPlayer1();
+    const player2 = newGame.getPlayer2();
+
+    for (let i = 0; i < 7; i++) {
+      for (let j = 0; j < 6; j++) {
+        if (j % 2 === 0) {
+          console.log(newGame.board.boardPieces[i][j]);
+          newGame.board.boardPieces[i][j].setPlayer(player1);
+          console.log(newGame.board.boardPieces[i][j].player);
+        } else {
+          newGame.board.boardPieces[i][j].setPlayer(player2);
+          console.log(newGame.board.boardPieces[i][j].player);
+        }
       }
     }
 
-    const newGameObj = new newGame();
-
-    newGameObj.checkWin(newGameObj.player1, 2, 4);
-    expect(newGameObj.displayWinner).toHaveBeenCalledWith('draw');
+    // execute
   });
 });

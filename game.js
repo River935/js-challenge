@@ -35,69 +35,87 @@ class Game {
 
   checkWin(player, x, y) {
     if (this.rounds === 42) {
-      console.log('draw');
-      game.displayWinner('draw');
-      return;
+      this.displayWinner('draw');
+      return "It's a draw";
     }
-    // check vertically
-    let countPlayerPieces = 0;
+
+    if (
+      this.checkVerticalWin(player, x, y) ||
+      this.checkHorizontalWin(player, x, y) ||
+      this.checkDiagonalWin(player, x, y)
+    ) {
+      this.displayWinner('winner');
+    }
+    return;
+  }
+
+  checkVerticalWin(player, x, y) {
+    let countPieces = 0;
     for (let i = 5; i >= 0; i--) {
-      if (game.board.boardPieces[x][i].getPlayer() === player) {
-        countPlayerPieces++;
-        if (countPlayerPieces === 4) {
-          game.displayWinner('winner');
-          return;
+      if (this.board.getPiece(x, i).getPlayer() === player) {
+        countPieces++;
+        if (countPieces === 4) {
+          return true;
         }
       } else {
-        countPlayerPieces = 0;
+        countPieces = 0;
       }
     }
+    return false;
+  }
 
-    // check horizontally
-    countPlayerPieces = 0;
+  checkHorizontalWin(player, x, y) {
+    let countPieces = 0;
     for (let j = 6; j >= 0; j--) {
-      if (game.board.boardPieces[j][y].getPlayer() === player) {
-        countPlayerPieces++;
-        if (countPlayerPieces === 4) {
-          game.displayWinner('winner');
-          return;
+      if (this.board.getPiece(j, y).getPlayer() === player) {
+        countPieces++;
+        if (countPieces === 4) {
+          return true;
         }
       } else {
-        countPlayerPieces = 0;
+        countPieces = 0;
       }
     }
-    // check diagonally
+    return false;
+  }
 
-    //check diagonal right to left
+  checkDiagonalWin(player, x, y) {
+    return (
+      this.checkRightToLeftDiagonalWin(player, x, y) ||
+      this.checkLeftToRightDiagonalWin(player, x, y)
+    );
+  }
+
+  checkRightToLeftDiagonalWin(player, x, y) {
     for (let i = 6; i >= 3; i--) {
       for (let j = 5; j >= 3; j--) {
-        if (game.board.boardPieces[i][j].getPlayer() === player) {
-          if (
-            game.board.boardPieces[i - 1][j - 1].getPlayer() === player &&
-            game.board.boardPieces[i - 2][j - 2].getPlayer() === player &&
-            game.board.boardPieces[i - 3][j - 3].getPlayer() === player
-          ) {
-            game.displayWinner('winner');
-            return;
-          }
+        if (
+          this.board.getPiece(i, j).getPlayer() === player &&
+          this.board.getPiece(i - 1, j - 1).getPlayer() === player &&
+          this.board.getPiece(i - 2, j - 2).getPlayer() === player &&
+          this.board.getPiece(i - 3, j - 3).getPlayer() === player
+        ) {
+          return true;
         }
       }
     }
-    //check left to right
+    return false;
+  }
+
+  checkLeftToRightDiagonalWin(player, x, y) {
     for (let i = 0; i <= 3; i++) {
       for (let j = 5; j >= 3; j--) {
-        if (game.board.boardPieces[i][j].getPlayer() === player) {
-          if (
-            game.board.boardPieces[i + 1][j - 1].getPlayer() === player &&
-            game.board.boardPieces[i + 2][j - 2].getPlayer() === player &&
-            game.board.boardPieces[i + 3][j - 3].getPlayer() === player
-          ) {
-            game.displayWinner('winner');
-            return;
-          }
+        if (
+          this.board.getPiece(i, j).getPlayer() === player &&
+          this.board.getPiece(i + 1, j - 1).getPlayer() === player &&
+          this.board.getPiece(i + 2, j - 2).getPlayer() === player &&
+          this.board.getPiece(i + 3, j - 3).getPlayer() === player
+        ) {
+          return true;
         }
       }
     }
+    return false;
   }
 
   // display winner
@@ -107,18 +125,16 @@ class Game {
     //console.log(winnerName[0]);
     winnerContainer[0].style.display = 'block';
     if (result === 'winner') {
-      winnerName[0].innerHTML = ` Player ${game
-        .getPlayerTurn()
-        .getName()} won!! `;
+      winnerName[0].innerHTML = ` Player ${this.getPlayerTurn().getName()} won!! `;
       celebrate();
-      game.getPlayerTurn().setWins();
-      if (game.getPlayerTurn() === game.getPlayer1()) {
-        console.log('player1 wins', game.getPlayer1().getWins());
+      this.getPlayerTurn().setWins();
+      if (this.getPlayerTurn() === this.getPlayer1()) {
+        console.log('player1 wins', this.getPlayer1().getWins());
         let player1Wins = document.getElementById('player1Wins');
-        player1Wins.innerHTML = game.getPlayer1().getWins();
+        player1Wins.innerHTML = this.getPlayer1().getWins();
       } else {
         let player2Wins = document.getElementById('player2Wins');
-        player2Wins.innerHTML = game.getPlayer2().getWins();
+        player2Wins.innerHTML = this.getPlayer2().getWins();
       }
     } else if (result === 'draw') {
       winnerName[0].innerHTML = ` it´s a draw!!! `;
@@ -138,7 +154,7 @@ class Game {
   }
 
   nextGame() {
-    game.board.resetBoard();
+    this.board.resetBoard();
     let winnerContainer = document.getElementsByClassName('board__winner');
     winnerContainer[0].style.display = 'none';
   }
@@ -186,10 +202,15 @@ class Board {
 
         game.setRounds();
         game.checkWin(currentPlayerTurn, x, y);
+        console.log('I do get here');
         game.setPlayerTurn();
         return;
       }
     }
+  }
+
+  getPiece(x, y) {
+    return this.boardPieces[x][y];
   }
 }
 
@@ -283,7 +304,7 @@ function addPieceEventHandler(event) {
 
 //confetti
 const canvas = document.querySelector('#confetti');
-/* const jsConfetti = new JSConfetti();
+const jsConfetti = new JSConfetti();
 
 console.log(jsConfetti);
 
@@ -293,7 +314,7 @@ function celebrate() {
       emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🦄', '🌸'],
     })
     .then(() => jsConfetti.addConfetti());
-} */
+}
 
 module.exports = {
   Game,
