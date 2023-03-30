@@ -135,6 +135,7 @@ canvas#confetti {
   margin-top: 55%;
   margin-right: 30px;
   margin-left: 30px;
+  font-family: "Audiowide", sans-serif;
 }
 .main__container .board__winner-namebutton:hover {
   background: #8133cf;

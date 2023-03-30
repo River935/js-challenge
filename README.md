@@ -21,31 +21,33 @@ settings: how big is the board, what are the winning conditions,
 customise colors
 Add animations and physics for falling stones
 
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
-[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
+[ ][ ][ ][ ][ ][ ].
 
 **To do list**
 
-- [ ] possible draw (nobody win).
-- [ ] create a button for play again (so it after resets).
-- [ ] name of players.
-- [ ] count how many times win.
 - [ ] show the the current player.
-- [ ] style the board nicely.
+- [x] possible draw (nobody win).
+- [x] create a button for play again (so it after resets).
+- [x] name of players.
+- [x] count how many times win.
+- [x] style the board nicely.
 
 **Additional tasks**
 
 - [ ] fancy style
 - [ ] Play with mouse or keyboard
-- [ ] settings: how big is the board, what are the winning conditions, customise colors
+- [ ] how big is the board
+- [ ] what are the winning conditions
+- [ ] customise colors
 - [ ] Add animations and physics for falling stones
-- [x] ..
+- [x] Restart Game with button
 
 **Coding**
 
