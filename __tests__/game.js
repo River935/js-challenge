@@ -3,10 +3,10 @@ class Game {
     this.board = new Board();
     this.player1 = new Player(player1Name, 'red');
     this.player2 = new Player(player2Name, 'yellow');
-    this.playerTurn = this.player1;
+    this.playerTurn = {};
+
     this.rounds = 0;
   }
-
   // add players based on input
   getPlayer1() {
     return this.player1;
@@ -20,6 +20,10 @@ class Game {
     return this.playerTurn;
   }
 
+  setFirstPlayerTurn() {
+    this.playerTurn =
+      Math.floor(Math.random() * 2) === 0 ? this.player1 : this.player2;
+  }
   setPlayerTurn() {
     this.playerTurn =
       this.playerTurn === this.player1 ? this.player2 : this.player1;
@@ -122,14 +126,13 @@ class Game {
   displayWinner(result) {
     let winnerContainer = document.getElementsByClassName('board__winner');
     let winnerName = document.getElementsByClassName('board__winner-name');
-    //console.log(winnerName[0]);
+
     winnerContainer[0].style.display = 'block';
     if (result === 'winner') {
       winnerName[0].innerHTML = ` Player ${this.getPlayerTurn().getName()} won!! `;
       celebrate();
       this.getPlayerTurn().setWins();
       if (this.getPlayerTurn() === this.getPlayer1()) {
-        console.log('player1 wins', this.getPlayer1().getWins());
         let player1Wins = document.getElementById('player1Wins');
         player1Wins.innerHTML = this.getPlayer1().getWins();
       } else {
@@ -160,7 +163,6 @@ class Game {
   }
 }
 
-// on start game
 class Board {
   constructor() {
     this.boardPieces = [];
@@ -189,12 +191,11 @@ class Board {
     let currentPlayerTurn = game.getPlayerTurn();
     for (let y = 5; y >= 0; y--) {
       if (y < 0) return;
-      //console.log('here', game.board.boardPieces[x][y]);
+
       if (game.board.boardPieces[x][y].isEmpty()) {
         game.board.boardPieces[x][y].setEmpty();
         game.board.boardPieces[x][y].setPlayer(currentPlayerTurn);
         const piece = document.getElementById(`${x}.${y}`);
-        //console.log(currentPlayerTurn);
 
         piece.style.backgroundColor = currentPlayerTurn.color;
 
@@ -202,8 +203,9 @@ class Board {
 
         game.setRounds();
         game.checkWin(currentPlayerTurn, x, y);
-        console.log('I do get here');
+
         game.setPlayerTurn();
+        displayCurrentPlayerTurn();
         return;
       }
     }
@@ -267,16 +269,19 @@ function eventHandlerGetNames() {
   return [player1, player2];
 }
 
-function restartGameHandler() {}
-
 const game = new Game();
 function startGame() {
   // get name inputs for each player
   let playersNames = eventHandlerGetNames();
 
   let form = document.getElementsByTagName('form');
-  //console.log(form);
+
   form[0].style.display = 'none';
+
+  let playerTurnEl = document.getElementsByClassName(
+    'main__container__player-turn',
+  );
+  playerTurnEl[0].style.display = 'block';
 
   let boardEl = document.getElementsByClassName('board');
   boardEl[0].style.display = 'flex';
@@ -291,6 +296,8 @@ function startGame() {
 
   game.player1.name = playersNames[0];
   game.player2.name = playersNames[1];
+  game.setFirstPlayerTurn();
+  displayCurrentPlayerTurn();
 
   let player1Wins = document.getElementById('player1Wins');
   player1Wins.innerHTML = game.player1.getWins();
@@ -302,12 +309,9 @@ function addPieceEventHandler(event) {
   game.board.addPiece(event);
 }
 
-/*
 //confetti
-const canvas = document.querySelector('#confetti');
+/* const canvas = document.querySelector('#confetti');
 const jsConfetti = new JSConfetti();
-
-console.log(jsConfetti);
 
 function celebrate() {
   jsConfetti
@@ -317,6 +321,11 @@ function celebrate() {
     .then(() => jsConfetti.addConfetti());
 } */
 
+function displayCurrentPlayerTurn() {
+  const playerTurnNameEl = document.getElementById('player-turn');
+  playerTurnNameEl.innerHTML = game.getPlayerTurn().getName();
+  playerTurnNameEl.style.color = game.getPlayerTurn().color;
+}
 module.exports = {
   Game,
   Board,

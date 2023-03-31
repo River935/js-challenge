@@ -1,0 +1,143 @@
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Audiowide", sans-serif;
+  background-color: #90c1e9;
+}
+
+canvas#confetti {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.title__h1 {
+  color: black;
+  text-align: center;
+}
+
+.submit__player-names {
+  width: 25rem;
+  height: 200px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 10px;
+  background: #7f71a8;
+  box-shadow: #6c608f;
+  color: white;
+  font-weight: 600;
+}
+.submit__player-names-div-pl::-moz-placeholder {
+  font-family: "Audiowide", sans-serif;
+  letter-spacing: 2px;
+}
+.submit__player-names-div-pl::placeholder {
+  font-family: "Audiowide", sans-serif;
+  letter-spacing: 2px;
+}
+.submit__player-namesbtn {
+  color: white;
+  border-radius: 4px;
+  background: #b384e1;
+  padding: 8px;
+  font-size: 16px;
+  font-family: "Audiowide", sans-serif;
+}
+.submit__player-namesbtn:hover {
+  background: #8133cf;
+}
+.submit__player-names ::-moz-placeholder {
+  color: darkgrey;
+}
+.submit__player-names ::placeholder {
+  color: darkgrey;
+}
+.submit__player-names label {
+  margin-right: 20px;
+}
+.submit__player-names #player1,
+.submit__player-names #player2 {
+  border-radius: 4px;
+}
+
+.main__container {
+  display: flex;
+  justify-content: space-between;
+}
+.main__container__player {
+  width: 100%;
+  padding: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main__container__player__piece {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px darkblue;
+}
+.main__container .board {
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 25rem;
+  margin: 0 auto;
+  gap: 10px;
+  position: relative;
+}
+.main__container .board__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main__container .board__col-row {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: inset 0 0 5px darkblue;
+}
+.main__container .board__winner {
+  margin: 0 auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(46, 16, 126, 0.8);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  color: white;
+  font-size: 24px;
+}
+.main__container .board__winner-name {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main__container .board__winner-namebutton {
+  color: white;
+  border-radius: 4px;
+  background: #b384e1;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 55%;
+  margin-right: 30px;
+  margin-left: 30px;
+  font-family: "Audiowide", sans-serif;
+}
+.main__container .board__winner-namebutton:hover {
+  background: #8133cf;
+}/*# sourceMappingURL=index.css.map */
