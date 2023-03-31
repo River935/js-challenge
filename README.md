@@ -2,7 +2,7 @@
 
 ## Live URL
 
-[river935.github.io/matchcenter/](https://river935.github.io/js-challenge/)
+[river935.github.io/js-challenge/](https://river935.github.io/js-challenge/)
 
 ## Todo list
 
@@ -32,7 +32,7 @@ Add animations and physics for falling stones
 
 **To do list**
 
-- [ ] show the the current player.
+- [x] show the the current player.
 - [x] possible draw (nobody win).
 - [x] create a button for play again (so it after resets).
 - [x] name of players.
